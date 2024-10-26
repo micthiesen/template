@@ -24,6 +24,6 @@ app.get("ping", async (ctx) => {
 
 export function serve() {
   honoServe({ fetch: app.fetch, port: config.PORT }, (info) => {
-    console.log(`Listening on http://localhost:${info.port}`);
+    logger.info(`Listening on http://localhost:${info.port}`);
   });
 }
