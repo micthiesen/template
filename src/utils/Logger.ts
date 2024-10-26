@@ -7,6 +7,12 @@ const LOG_LEVEL_MAP: Record<LogLevel, number> = {
   [LogLevel.WARN]: 30,
   [LogLevel.ERROR]: 40,
 };
+const LOG_PREFIX_MAP: Record<LogLevel, string> = {
+  [LogLevel.DEBUG]: "[DEBUG]",
+  [LogLevel.INFO]: " [INFO]",
+  [LogLevel.WARN]: " [WARN]",
+  [LogLevel.ERROR]: "[ERROR]",
+};
 const LOG_LEVEL_NUM = LOG_LEVEL_MAP[config.LOG_LEVEL];
 
 export default class Logger {
@@ -19,7 +25,7 @@ export default class Logger {
   public log(level: LogLevel, message: string, ...args: any[]) {
     const levelNum = LOG_LEVEL_MAP[level];
     if (levelNum < LOG_LEVEL_NUM) return;
-    const messageFinal = `[${level.toUpperCase()}] <${this.name}> ${message}`;
+    const messageFinal = `${LOG_PREFIX_MAP[level]} <${this.name}> ${message}`;
     console[level](messageFinal, ...args);
   }
 
